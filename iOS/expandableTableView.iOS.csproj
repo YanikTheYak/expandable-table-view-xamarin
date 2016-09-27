@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="MonoTouch.Dialog-1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\expandableTableView\expandableTableView.csproj">
@@ -105,6 +106,12 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="DatePickerCell.xib" />
+    <InterfaceDefinition Include="TextfieldCell.xib" />
+    <InterfaceDefinition Include="SliderCell.xib" />
+    <InterfaceDefinition Include="NormalCell.xib" />
+    <InterfaceDefinition Include="SwitchCell.xib" />
+    <InterfaceDefinition Include="ValuePickerCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -117,6 +124,10 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomCellDelegate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\CellDescriptor.plist" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

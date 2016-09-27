@@ -1,9 +1,17 @@
 ﻿using System;
+using UIKit;
+
 namespace expandableTableView.iOS
 {
-	public class CustomCellDelegate
+	public interface CustomCellDelegate
 	{
-		public CustomCellDelegate()
+		void dateWasSelected(string selectedDateString);
+	}
+
+	public class CustomCell : UITableViewCell, IUITextFieldDelegate
+	{
+		CustomCellDelegate ccDelegate;
+		public CustomCell()
 		{
 		}
 	}
