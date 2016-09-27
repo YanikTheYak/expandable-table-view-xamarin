@@ -11,7 +11,7 @@ namespace expandableTableView.iOS
 	public class CustomCell : UITableViewCell, IUITextFieldDelegate
 	{
 		CustomCellDelegate ccDelegate;
-		public CustomCell()
+		public CustomCell() : base()
 		{
 		}
 	}

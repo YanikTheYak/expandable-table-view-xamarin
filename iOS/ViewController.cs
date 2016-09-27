@@ -43,7 +43,7 @@ namespace expandableTableView.iOS
 	{		
 		UITableView tblExpandable;
 
-		NSArray cellDescriptors;
+		NSMutableArray cellDescriptors;
 		List<List<int>> visibleRowsPerSection = new List<List<int>>();
 
 
@@ -76,11 +76,11 @@ namespace expandableTableView.iOS
 
 			path = NSBundle.MainBundle.BundlePath;
 			Console.WriteLine(path);
-			path += @"/Resources/CellDescriptor.plist";
+			path += @"/CellDescriptor.plist";
 
-			cellDescriptors = NSArray.FromFile(path);
+			cellDescriptors = NSMutableArray.FromFile(path);
 
-		//	getIndicesOfVisibleRows(); // TODO - implement this?
+			getIndicesOfVisibleRows(); 
 
 			tblExpandable.ReloadData();
 		}
@@ -91,14 +91,15 @@ namespace expandableTableView.iOS
 
 			for (nuint i = 0; i < cellDescriptors.Count; i++)
 			{
-				var currentSectionCells = cellDescriptors.GetItem<NSArray>(i);
+				var currentSectionCells = cellDescriptors.GetItem<NSMutableArray>(i);
 				List<int> visibleRows = new List<int>();
 
 				for (nuint j = 0; j < currentSectionCells.Count; j++)
 				{
-					var currentSectionRow = currentSectionCells.GetItem<NSDictionary>(j);
+					var currentSectionRow = currentSectionCells.GetItem<NSMutableDictionary>(j);
+
 					if (currentSectionRow.ContainsKey(new NSString("isVisible")) &&
-					    currentSectionRow.ValueForKey(new NSString("isVisible")).ToString() == "true")
+					    currentSectionRow.ValueForKey(new NSString("isVisible")).ToString() == "1")
 					{
 						visibleRows.Add((int)j);
 					}
@@ -110,11 +111,11 @@ namespace expandableTableView.iOS
 
 		}
 
-		private NSDictionary getCellDescriptorForIndexPath(NSIndexPath indexPath) 
+		private NSMutableDictionary getCellDescriptorForIndexPath(NSIndexPath indexPath) 
 		{
 			var indexOfVisibleRow = visibleRowsPerSection[indexPath.Section][indexPath.Row];
 
-			NSDictionary cellDescriptor = cellDescriptors.GetItem<NSArray>((System.nuint)indexPath.Section).GetItem<NSDictionary>((System.nuint)indexOfVisibleRow);
+			NSMutableDictionary cellDescriptor = cellDescriptors.GetItem<NSMutableArray>((System.nuint)indexPath.Section).GetItem<NSMutableDictionary>((System.nuint)indexOfVisibleRow);
 
 			return cellDescriptor;
 		}
@@ -151,9 +152,9 @@ namespace expandableTableView.iOS
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
-			NSDictionary currentCellDescriptor = getCellDescriptorForIndexPath(indexPath);
+			NSMutableDictionary currentCellDescriptor = getCellDescriptorForIndexPath(indexPath);
 			string cellIdentifier = currentCellDescriptor.ValueForKey(new NSString("cellIdentifier")).ToString();
-			CustomCell cell = (CustomCell)tableView.DequeueReusableCell(cellIdentifier, indexPath);
+			UITableViewCell cell = tableView.DequeueReusableCell(cellIdentifier, indexPath);
 
 			switch (cellIdentifier)
 			{
@@ -226,7 +227,7 @@ namespace expandableTableView.iOS
 
 		public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
 		{
-			NSDictionary currentCellDescriptor = getCellDescriptorForIndexPath(indexPath);
+			NSMutableDictionary currentCellDescriptor = getCellDescriptorForIndexPath(indexPath);
 			string cellIdentifier = currentCellDescriptor.ValueForKey(new NSString("cellIdentifier")).ToString();
 
 			switch (cellIdentifier)
@@ -245,33 +246,34 @@ namespace expandableTableView.iOS
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
 			var indexOfTappedRow = visibleRowsPerSection[indexPath.Section][indexPath.Row];
-			NSDictionary currentCellDescriptor = getCellDescriptorForIndexPath(indexPath);
+			NSMutableDictionary currentCellDescriptor = (NSMutableDictionary)getCellDescriptorForIndexPath(indexPath);
 
 			string isExpandable = currentCellDescriptor.ValueForKey(new NSString("isExpandable")).ToString();
 			string isExpanded = currentCellDescriptor.ValueForKey(new NSString("isExpanded")).ToString();
 
-			if (isExpandable == "Yes")
+			if (isExpandable == "1")
 			{
 				bool shouldExpandAndShowSubRows = false;
 
-				if (isExpanded == "Yes")
+				if (isExpanded == "0")
 				{
 					// In this case the cell should expand.
 					shouldExpandAndShowSubRows = true;
 
 				}
-				// TODO: True and False - Yes and No WILL be a problem - need to fix
-				currentCellDescriptor.SetValueForKey(new NSString(shouldExpandAndShowSubRows.ToString()), new NSString("isExpanded"));
+				int x = shouldExpandAndShowSubRows ? 1 : 0;
+
+//				currentCellDescriptor.Remove(new NSString("isExpanded"));
+				currentCellDescriptor.SetValueForKey(new NSString(x.ToString()), new NSString("isExpanded"));
 
 				int additionalRows = (int)(NSNumber)currentCellDescriptor.ValueForKey(new NSString("additionalRows"));
 
 				for (int i = indexOfTappedRow + 1; i <= indexOfTappedRow + additionalRows; i++)
 				{
-					NSDictionary cellDescriptor = cellDescriptors.GetItem<NSArray>((System.nuint)indexPath.Section).GetItem<NSDictionary>((System.nuint)i);
-					cellDescriptor.SetValueForKey(new NSString(shouldExpandAndShowSubRows.ToString()), new NSString("isVisible"));
+					NSMutableDictionary cellDescriptor = (NSMutableDictionary)cellDescriptors.GetItem<NSMutableArray>((System.nuint)indexPath.Section).GetItem<NSMutableDictionary>((System.nuint)i);
+//					cellDescriptor.Remove(new NSString("isVisible"));
+					cellDescriptor.SetValueForKey(new NSString(x.ToString()), new NSString("isVisible"));
 				}
-
-
 			}
 			else
 			{
@@ -283,7 +285,7 @@ namespace expandableTableView.iOS
 
 					for (int i = indexOfTappedRow - 1; i >= 0; i -= 1)
 					{
-						NSDictionary cellDescriptor = cellDescriptors.GetItem<NSArray>((System.nuint)indexPath.Section).GetItem<NSDictionary>((System.nuint)i);
+						NSMutableDictionary cellDescriptor = cellDescriptors.GetItem<NSMutableArray>((System.nuint)indexPath.Section).GetItem<NSMutableDictionary>((System.nuint)i);
 						if (cellDescriptor.ValueForKey(new NSString("isExpandable")).ToString() == "Yes")
 						{
 							indexOfParentCell = i;
