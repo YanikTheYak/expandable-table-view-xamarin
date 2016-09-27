@@ -10,7 +10,11 @@ namespace expandableTableView.iOS
 	public partial class ViewController : UITableViewController
 	{
 		ViewControllerDelegate vcDelegate = null;
-		
+
+		public ViewController(IntPtr handle) : base(handle)
+		{
+		}
+
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
@@ -22,7 +26,7 @@ namespace expandableTableView.iOS
 		{
 			base.ViewWillAppear(animated);
 
-			vcDelegate = new ViewControllerDelegate();
+			vcDelegate = new ViewControllerDelegate(this.TableView );
 			this.TableView.Source = vcDelegate;
 
 
@@ -36,17 +40,16 @@ namespace expandableTableView.iOS
 	}
 
 	public class ViewControllerDelegate : UITableViewSource, CustomCellDelegate
-	{
-		
-		int count = 1;
+	{		
 		UITableView tblExpandable;
 
 		NSArray cellDescriptors;
 		List<List<int>> visibleRowsPerSection = new List<List<int>>();
 
 
-		public ViewControllerDelegate()
+		public ViewControllerDelegate(UITableView tableView)
 		{
+			tblExpandable = tableView;
 			configureTableView();
 
 			loadCellDescriptors();
@@ -55,8 +58,8 @@ namespace expandableTableView.iOS
 
 		private void configureTableView()
 		{
-			tblExpandable.Delegate = (IUITableViewDelegate)Self;
-			tblExpandable.DataSource = (IUITableViewDataSource)Self;
+	//		tblExpandable.Delegate = (IUITableViewDelegate)this;
+	//		tblExpandable.DataSource = (IUITableViewDataSource)this;
 			tblExpandable.TableFooterView = new UIView();
 
 			tblExpandable.RegisterNibForCellReuse(UINib.FromName("NormalCell", null), "idCellNormal");
@@ -70,11 +73,14 @@ namespace expandableTableView.iOS
 		private void loadCellDescriptors()
 		{
 			string path;
-			path = @"Resources/CellDescriptor.plist";
+
+			path = NSBundle.MainBundle.BundlePath;
+			Console.WriteLine(path);
+			path += @"/Resources/CellDescriptor.plist";
 
 			cellDescriptors = NSArray.FromFile(path);
 
-		//	getIndicesOfVisibleRows();
+		//	getIndicesOfVisibleRows(); // TODO - implement this?
 
 			tblExpandable.ReloadData();
 		}
