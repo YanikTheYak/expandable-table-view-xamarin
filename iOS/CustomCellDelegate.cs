@@ -8,10 +8,10 @@ namespace expandableTableView.iOS
 		void dateWasSelected(string selectedDateString);
 	}
 
-	public class CustomCell : UITableViewCell, IUITextFieldDelegate
+	public partial class CustomCell22 : UITableViewCell, IUITextFieldDelegate
 	{
 		CustomCellDelegate ccDelegate;
-		public CustomCell() : base()
+		public CustomCell22() : base()
 		{
 		}
 	}

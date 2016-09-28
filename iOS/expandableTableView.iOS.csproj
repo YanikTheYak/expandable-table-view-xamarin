@@ -108,10 +108,10 @@
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="DatePickerCell.xib" />
     <InterfaceDefinition Include="TextfieldCell.xib" />
-    <InterfaceDefinition Include="SliderCell.xib" />
-    <InterfaceDefinition Include="NormalCell.xib" />
     <InterfaceDefinition Include="SwitchCell.xib" />
     <InterfaceDefinition Include="ValuePickerCell.xib" />
+    <InterfaceDefinition Include="SliderCell.xib" />
+    <InterfaceDefinition Include="NormalCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -125,6 +125,10 @@
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomCellDelegate.cs" />
+    <Compile Include="CustomCell.cs" />
+    <Compile Include="CustomCell.designer.cs">
+      <DependentUpon>CustomCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\CellDescriptor.plist" />

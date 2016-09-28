@@ -11,16 +11,9 @@ using UIKit;
 
 namespace expandableTableView.iOS
 {
-    [Register ("ViewController")]
-    partial class ViewController
+    [Register ("CustomCell")]
+    partial class CustomCell
     {
-        [Outlet]
-        UIKit.UIButton Button { get; set; }
-
-
-        [Outlet]
-        UIKit.UITableView tblExpandable { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
         }

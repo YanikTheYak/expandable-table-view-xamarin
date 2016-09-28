@@ -156,7 +156,7 @@ namespace expandableTableView.iOS
 			string cellIdentifier = currentCellDescriptor.ValueForKey(new NSString("cellIdentifier")).ToString();
 			UITableViewCell cell = tableView.DequeueReusableCell(cellIdentifier, indexPath);
 
-//			Console.WriteLine(cell.GetType().ToString());
+			Console.WriteLine(cell.GetType().ToString());
 
 			switch (cellIdentifier)
 			{
