@@ -156,6 +156,8 @@ namespace expandableTableView.iOS
 			string cellIdentifier = currentCellDescriptor.ValueForKey(new NSString("cellIdentifier")).ToString();
 			UITableViewCell cell = tableView.DequeueReusableCell(cellIdentifier, indexPath);
 
+//			Console.WriteLine(cell.GetType().ToString());
+
 			switch (cellIdentifier)
 			{
 				case "idCellNormal":
@@ -262,8 +264,6 @@ namespace expandableTableView.iOS
 
 				}
 				int x = shouldExpandAndShowSubRows ? 1 : 0;
-
-//				currentCellDescriptor.Remove(new NSString("isExpanded"));
 				currentCellDescriptor.SetValueForKey(new NSString(x.ToString()), new NSString("isExpanded"));
 
 				int additionalRows = (int)(NSNumber)currentCellDescriptor.ValueForKey(new NSString("additionalRows"));
@@ -271,7 +271,6 @@ namespace expandableTableView.iOS
 				for (int i = indexOfTappedRow + 1; i <= indexOfTappedRow + additionalRows; i++)
 				{
 					NSMutableDictionary cellDescriptor = (NSMutableDictionary)cellDescriptors.GetItem<NSMutableArray>((System.nuint)indexPath.Section).GetItem<NSMutableDictionary>((System.nuint)i);
-//					cellDescriptor.Remove(new NSString("isVisible"));
 					cellDescriptor.SetValueForKey(new NSString(x.ToString()), new NSString("isVisible"));
 				}
 			}
