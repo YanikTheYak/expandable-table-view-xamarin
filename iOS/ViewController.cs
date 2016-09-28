@@ -183,6 +183,7 @@ namespace expandableTableView.iOS
 				default:
 					break;
 			}
+
 			//cell.Delegate = self; // TODO: Fix this?
 
 

@@ -16,21 +16,23 @@
                 <frame key="frameInset" width="342" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-5n-gff">
-                        <frame key="frameInset" minX="292" minY="12" width="44" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QH-5n-gff">
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJy-0D-GDR">
-                        <frame key="frameInset" minX="18" minY="11" width="34" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJy-0D-GDR">
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="0QH-5n-gff" firstAttribute="top" secondItem="frx-Rk-LJD" secondAttribute="topMargin" constant="4" id="IjB-X2-MzQ"/>
                     <constraint firstItem="kJy-0D-GDR" firstAttribute="leading" secondItem="frx-Rk-LJD" secondAttribute="leadingMargin" constant="10" id="Rez-dR-q2t"/>
+                    <constraint firstItem="kJy-0D-GDR" firstAttribute="top" secondItem="frx-Rk-LJD" secondAttribute="topMargin" constant="3" id="XP1-zC-L4r"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="kJy-0D-GDR" secondAttribute="bottom" constant="4" id="fkK-FB-lDV"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="0QH-5n-gff" secondAttribute="bottom" constant="3" id="rFY-wP-fHB"/>
                 </constraints>
             </tableViewCellContentView>
             <constraints>

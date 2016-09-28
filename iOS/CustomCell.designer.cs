@@ -14,6 +14,9 @@ namespace expandableTableView.iOS
     [Register ("CustomCell")]
     partial class CustomCell
     {
+        [Action ("CelTextEditEnd:")]
+        partial void CelTextEditEnd (UIKit.UITextField sender);
+
         void ReleaseDesignerOutlets ()
         {
         }

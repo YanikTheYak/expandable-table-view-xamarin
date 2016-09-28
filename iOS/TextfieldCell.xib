@@ -16,18 +16,20 @@
                 <frame key="frameInset" width="375" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter text here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3EN-Gb-qEO">
-                        <frame key="frameInset" minX="8" minY="7" width="359" height="30"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3EN-Gb-qEO">
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <action selector="CelTextEditEnd:" destination="-1" eventType="editingDidEnd" id="QMY-Xh-JMq"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="3EN-Gb-qEO" secondAttribute="bottom" constant="-1" id="Pao-B2-op9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3EN-Gb-qEO" secondAttribute="trailing" id="5dg-DR-xLp"/>
+                    <constraint firstItem="3EN-Gb-qEO" firstAttribute="top" secondItem="nSN-2O-o6Q" secondAttribute="topMargin" constant="-1" id="Rrj-ha-0me"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="3EN-Gb-qEO" secondAttribute="bottom" constant="-1" id="dvO-4Q-PNf"/>
                     <constraint firstAttribute="leadingMargin" secondItem="3EN-Gb-qEO" secondAttribute="leading" id="jh6-m6-Cjz"/>
-                    <constraint firstItem="3EN-Gb-qEO" firstAttribute="top" secondItem="nSN-2O-o6Q" secondAttribute="topMargin" constant="-1" id="p2X-cV-3IJ"/>
-                    <constraint firstItem="3EN-Gb-qEO" firstAttribute="centerY" secondItem="nSN-2O-o6Q" secondAttribute="centerY" id="piM-0e-07F"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-358.5" y="-25"/>
