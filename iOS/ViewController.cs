@@ -293,28 +293,24 @@ namespace expandableTableView.iOS
 						}
 					}
 
-					//	cellDescriptors[indexPath.section][indexOfParentCell].setValue((tblExpandable.cellForRowAtIndexPath(indexPath) as!CustomCell).textLabel?.text, forKey: "primaryTitle")
-					//            cellDescriptors[indexPath.section][indexOfParentCell].setValue(false, forKey: "isExpanded")
+					NSMutableDictionary cellDescriptor2 = cellDescriptors.GetItem<NSMutableArray>((System.nuint)indexPath.Section).GetItem<NSMutableDictionary>((System.nuint)indexOfParentCell);
+					CustomCell cell = (CustomCell)tblExpandable.CellAt(indexPath);
 
+					cellDescriptor2.SetValueForKey(new NSString(cell.TextLabel.Text), new NSString("primaryTitle"));
+					cellDescriptor2.SetValueForKey(new NSString("0"), new NSString("isExpanded"));
+					int additionalRows = (int)(NSNumber)cellDescriptor2.ValueForKey(new NSString("additionalRows"));
 
-
-					//for i in (indexOfParentCell + 1)...(indexOfParentCell + (cellDescriptors[indexPath.section][indexOfParentCell]["additionalRows"] as!Int))
-					//	{
-					//		cellDescriptors[indexPath.section][i].setValue(false, forKey: "isVisible")
-
-					//}
-					//}
-
-
-
-
-
+					for (int i = (indexOfParentCell + 1); i <= (indexOfParentCell + additionalRows); i++)
+					{
+						NSMutableDictionary cellDescriptor3 = cellDescriptors.GetItem<NSMutableArray>((System.nuint)indexPath.Section).GetItem<NSMutableDictionary>((System.nuint)i);
+						cellDescriptor3.SetValueForKey(new NSString("0"), new NSString("isVisible"));
+					}
 				}
-				getIndicesOfVisibleRows();
-
-				tblExpandable.ReloadSections(new NSIndexSet((nuint)indexPath.Section), UITableViewRowAnimation.Fade);
 
 			}
+			getIndicesOfVisibleRows();
+
+			tblExpandable.ReloadSections(new NSIndexSet((nuint)indexPath.Section), UITableViewRowAnimation.Fade);
 		}
 
 
