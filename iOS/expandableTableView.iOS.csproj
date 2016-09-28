@@ -107,11 +107,11 @@
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="DatePickerCell.xib" />
-    <InterfaceDefinition Include="TextfieldCell.xib" />
     <InterfaceDefinition Include="SwitchCell.xib" />
     <InterfaceDefinition Include="ValuePickerCell.xib" />
     <InterfaceDefinition Include="SliderCell.xib" />
     <InterfaceDefinition Include="NormalCell.xib" />
+    <InterfaceDefinition Include="TextfieldCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

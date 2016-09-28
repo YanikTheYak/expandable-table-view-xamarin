@@ -154,7 +154,7 @@ namespace expandableTableView.iOS
 		{
 			NSMutableDictionary currentCellDescriptor = getCellDescriptorForIndexPath(indexPath);
 			string cellIdentifier = currentCellDescriptor.ValueForKey(new NSString("cellIdentifier")).ToString();
-			UITableViewCell cell = tableView.DequeueReusableCell(cellIdentifier, indexPath);
+			CustomCell cell = (CustomCell)tableView.DequeueReusableCell(cellIdentifier, indexPath);
 
 			Console.WriteLine(cell.GetType().ToString());
 
